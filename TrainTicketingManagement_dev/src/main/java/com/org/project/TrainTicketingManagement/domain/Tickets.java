@@ -1,5 +1,6 @@
 package com.org.project.TrainTicketingManagement.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,12 +37,15 @@ public class Tickets extends Trace{
 	private int numOfSeats;
 	private double price;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="CLIENTID", nullable=false)
 	private Client client;
 	
-	private String departureDate;
-	private String ReturnDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date departureDate;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date ReturnDate;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Station departureStation;
@@ -65,6 +72,12 @@ public class Tickets extends Trace{
 	private List<Train> returnTrains;
 	private boolean isCancelled;
 	private String cancelationStatus;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date cancelDate;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date ticketDate;
 	
 
 }

@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -36,6 +39,8 @@ public class TrainSchedule extends Trace{
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn (name ="trainId")
 	private Train train;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date scheduleDate;
 
 }

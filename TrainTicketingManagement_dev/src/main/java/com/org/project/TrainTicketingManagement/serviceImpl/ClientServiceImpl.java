@@ -1,5 +1,7 @@
 package com.org.project.TrainTicketingManagement.serviceImpl;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ public class ClientServiceImpl implements ClientService {
 	public Client createClient(Client client) {
 		client.setPassword(passwordEncoder.encode(client.getPassword()));
 		client.setRole("ROLE_USER");
+		client.setRegisterDate(new Date());
 		clientRepository.save(client);
 		return clientRepository.save(client);
 	}

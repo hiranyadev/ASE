@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -41,26 +41,10 @@
 	<nav class="site-nav">
 		<div class="container">
 			<div class="site-navigation">
-				<a href="index.html" class="logo m-0">Tour <span class="text-primary">.</span></a>
+				<a href="index.html" class="logo m-0"> Train Booking <span class="text-primary">.</span></a>
 
 				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
-					<li class="active"><a href="index.html">Home</a></li>
-					<li class="has-children">
-						<a href="#">Dropdown</a>
-						<ul class="dropdown">
-							<li><a href="elements.html">Elements</a></li>
-							<li><a href="#">Menu One</a></li>
-							<li class="has-children">
-								<a href="#">Menu Two</a>
-								<ul class="dropdown">
-									<li><a href="#">Sub Menu One</a></li>
-									<li><a href="#">Sub Menu Two</a></li>
-									<li><a href="#">Sub Menu Three</a></li>
-								</ul>
-							</li>
-							<li><a href="#">Menu Three</a></li>
-						</ul>
-					</li>
+					<li class="active"><a href="/index">Home</a></li>
 					<li><a href="services.html">Services</a></li>
 					<li><a href="about.html">About</a></li>
 					<li><a href="contact.html">Contact Us</a></li>
@@ -84,36 +68,30 @@
 
 						<div class="row">
 							<div class="col-12">
-								<form class="form">
+								<form class="form" action="#" th:action="@{/client/searchData}" method="post" th:object="${bookingData}">
 									<div class="row mb-2">
 										<div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-											<select name="" id="" class="form-control custom-select">
+											<select th:field="*{departureStation}" id="depStation" name="depStation" class="form-control custom-select">
 												<option value="">Departure</option>
-												<option value="">Peru</option>
-												<option value="">Japan</option>
-												<option value="">Thailand</option>
-												<option value="">Brazil</option>
-												<option value="">United States</option>
-												<option value="">Israel</option>
-												<option value="">China</option>
-												<option value="">Russia</option>
+												<option 
+											        th:each="station : ${stations}" 
+											        th:value="${station.stationId}" 
+											        th:text="${station.stationName}">
+											    </option>
 											</select>
 										</div>
 										<div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-											<select name="" id="" class="form-control custom-select">
+											<select th:field="*{destinationStation}" id="desStation" name="desStation" class="form-control custom-select">
 												<option value="">Destination</option>
-												<option value="">Peru</option>
-												<option value="">Japan</option>
-												<option value="">Thailand</option>
-												<option value="">Brazil</option>
-												<option value="">United States</option>
-												<option value="">Israel</option>
-												<option value="">China</option>
-												<option value="">Russia</option>
+												<option 
+											        th:each="station : ${stations}" 
+											        th:value="${station.stationId}" 
+											        th:text="${station.stationName}">
+											    </option>
 											</select>
 										</div>
 										<div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-											<input type="date" class="form-control" name="date">
+											<input th:field="*{departureDate}" type="date" class="form-control" name="date">
 										</div>
 									</div>    
 									<div class="row align-items-stretch">
@@ -124,16 +102,6 @@
 								</form>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="before_main_section">
-					<div class="card-section" th:each="train : ${trainSchedule}">
-						<form th:action="@{/booking}" method="get">
-							<!-- <img th:src="@{${'images/'+train.arrival}}" height="280px" alt="" /> -->
-							<div class="card_body mt-1">
-								<button class="btn btn-primary" type="submit" name="Book" th:value="${movies.movieName}">Book now</button>
-							</div>
-						</form>
 					</div>
 				</div>
 				<div class="col-lg-5">
@@ -148,8 +116,6 @@
 			</div>
 		</div>
 	</div>
-
-
 	<div class="untree_co-section">
 		<div class="container">
 			<div class="row mb-5 justify-content-center">
@@ -602,6 +568,7 @@
 	<script src="../js/daterangepicker.js"></script>
 
 	<script src="../js/typed.js"></script>
+	<script src="../js/custom.js"></script>
 	<script>
 		$(function() {
 			var slides = $('.slides'),
@@ -629,9 +596,6 @@
 			});
 		})
 	</script>
-
-	<script src="../js/custom.js"></script>
-
 </body>
 
 </html>

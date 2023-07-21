@@ -1,5 +1,7 @@
 package com.org.project.TrainTicketingManagement.domain;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,5 +33,8 @@ public class TrainLongPriceses {
 	public Station toStation;
 	public double price;
 	public double longForJourny;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date effectiveDate;
 
 }
