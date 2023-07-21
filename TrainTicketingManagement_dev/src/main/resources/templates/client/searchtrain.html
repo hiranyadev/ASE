@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="Untree.co">
+	<link rel="shortcut icon" href="favicon.png">
+
+	<meta name="description" content="" />
+	<meta name="keywords" content="bootstrap, bootstrap4" />
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Serif+Pro:wght@400;700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<title>Search Trains</title>
+</head>
+<body>
+<div>	
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		    <div class="navbar-header">
+				<a class="navbar-brand " href="/index" > Train Booking <span class="text-primary">.</span></a>
+		    </div>
+		    <ul class="nav navbar-nav">
+				<li class="active"><a href="/index">Home</a></li>
+				<li><a href="/services">Services</a></li>
+				<li><a href="/about">About</a></li>
+				<li><a href="/contact">Contact Us</a></li>
+		    </ul>
+		    <ul class="nav navbar-nav navbar-right">
+		      <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+		      <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		    </ul>
+		</div>
+	</nav>
+
+<div class="container">
+		<div class="card-section" >
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Train Name</th>
+							<th>Departure</th>
+							<th>Arrival</th>
+							<th>Class</th>
+							<th>Available Seats</th>
+							<th>Price</th>
+							<th>          </th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="trainSchedule : ${trainSchedules}">
+							<th th:text="${trainSchedule.train.trainName}">Train Name</th>
+							<th th:text="${trainSchedule.departure.stationName}">Departure</th>
+							<th th:text="${trainSchedule.arrival.stationName}">Arrival</th>
+							<th>Classes</th>
+							<!-- <th th:text="${trainSchedule.train.availableClasses}">Class</th> -->
+							<!-- <th th:text="${trainSchedule.vendor}">Available Seats</th>
+							<th th:text="${trainSchedule.vendor}">Price</th> -->
+							<th>50</th>
+							<th>Rs. 500/-</th>
+							<th><div class="card_body mt-1">
+								<a class="button" th:href="@{/client/booking/{id}(id=${trainSchedule.scheduleId})}">  
+    								<button>Proceed</button>
+    							</a>
+								</div>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+		</div>	
+	</div>
+</div>
+</body>
+</html>
