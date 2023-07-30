@@ -67,8 +67,8 @@
 			<br></br> <br></br> <input type="submit" name="trainCapacity"
 				value="Show Train Current Capacity" />
 
-			<div th:object="${trainContent}"
-				th:if="${trainContent.trains.size()} >0" class="container">
+			<div <!-- th:object="${trainContent}"
+				th:if="${trainContent.trains.size()} >0" --> class="container">
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -78,11 +78,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="train:*{trains}">
+						<!-- <tr th:each="train:*{trains}">
 							<td th:text="${train.bound}" />
 							<td th:text="${train.type}" />
 							<th th:text="${train.capacity}" />
-						</tr>
+						</tr> -->
 					</tbody>
 				</table>
 			</div>

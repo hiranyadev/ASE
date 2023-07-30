@@ -18,5 +18,12 @@ public class BookingDetailsDto {
 	private String bookingDate;
 	private String clientName;
 	private String nic;
+	private Long scheduleId;
+	private Long clientId;
+	private Long departurStationId;
+	private Long destinationStationId;
+	private Long distancePriceId;
+	private double price;
+	private String others;
 
 }

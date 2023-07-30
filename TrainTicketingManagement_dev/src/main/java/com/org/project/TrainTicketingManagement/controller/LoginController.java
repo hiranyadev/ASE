@@ -38,6 +38,7 @@ public class LoginController {
 		if(clientAlreadyExist) {
 			session.setAttribute("msg", "Your already register with this email address. Please Login");
 		}else {
+			client.setUsername(client.getEmail());
 			Client createdClient = clientService.createClient(client);
 			if(createdClient != null)
 				session.setAttribute("msg", "Welcome to Online ticketing system. Please Login");
@@ -47,15 +48,6 @@ public class LoginController {
 		
 		return "redirect:/signin";
 	}
-	
-	/*
-	 * @GetMapping("/login") public String signInToSystem() {
-	 * //clientService.createClient(client); return "home"; }
-	 * 
-	 * @GetMapping("/home") public String home(Model model) { //List<TrainSchedule>
-	 * availableTrains = customerPanelService.getAvailableTrain(new Date());
-	 * //model.addAttribute("trainSchedule", availableTrains); return "home"; }
-	 */
 	
 	@GetMapping("/forgotPassword")
 	public String forgotPassword() {

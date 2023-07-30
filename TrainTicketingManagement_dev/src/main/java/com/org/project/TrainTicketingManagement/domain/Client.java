@@ -1,12 +1,15 @@
 package com.org.project.TrainTicketingManagement.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -56,5 +59,8 @@ public class Client {
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date registerDate;
+	
+	@OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+	private List<SeatArrangement> seat;
 
 }

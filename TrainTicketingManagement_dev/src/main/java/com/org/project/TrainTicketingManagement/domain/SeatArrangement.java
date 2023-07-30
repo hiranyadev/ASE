@@ -1,6 +1,9 @@
 package com.org.project.TrainTicketingManagement.domain;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,12 +26,25 @@ public class SeatArrangement {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long seatArrId;
-	private int seatNo;
+	
+	@ElementCollection
+	private List<String> seatNo;
 	
 	@ManyToOne(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
-	private TrainClasses classType;
+	private Carriages classType;
 	
 	@ManyToOne(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
 	private TrainSchedule trainSchedule;
+	
+	@ManyToOne
+	private Client client;
+	
+	public String allSeatsRecerved(SeatArrangement seatArrangement) {
+		String allreceved = null;		
+		for(String s : seatArrangement.seatNo) {
+			allreceved+=" "+s;
+		}		
+		return allreceved;
+	}
 
 }

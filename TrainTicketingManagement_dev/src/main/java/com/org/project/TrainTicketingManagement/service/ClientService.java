@@ -8,4 +8,6 @@ public interface ClientService {
 	
 	public boolean checkclientAlreadyExistByEmail(String email);
 
+	public Client getClientByEmail(String username);
+
 }

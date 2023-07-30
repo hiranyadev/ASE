@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,7 +32,7 @@ public class Tickets extends Trace{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long ticketId;
+	private Long ticketId;
 	private int numOfSeats;
 	private double price;
 	
@@ -44,20 +43,11 @@ public class Tickets extends Trace{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date departureDate;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date ReturnDate;
-	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Station departureStation;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Station destinationStation;
-	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Station ReturndepartureStation;
-	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Station ReturndestinationStation;
 	
 	@ManyToMany(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinTable(name="DEPART_TRAINS", 
@@ -65,11 +55,6 @@ public class Tickets extends Trace{
 				inverseJoinColumns= {@JoinColumn(name="DEPART_TRAIN_ID",referencedColumnName="trainId")}) 
 	private List<Train> departTrains;
 	
-	@ManyToMany(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
-	@JoinTable(name="RETURN_TRAINS", 
-				joinColumns= {@JoinColumn(name="ticketId", referencedColumnName="ticketId")}, 
-				inverseJoinColumns= {@JoinColumn(name="RETURN_TRAIN_ID",referencedColumnName="trainId")}) 
-	private List<Train> returnTrains;
 	private boolean isCancelled;
 	private String cancelationStatus;
 	
@@ -78,6 +63,11 @@ public class Tickets extends Trace{
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date ticketDate;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private SeatArrangement seat;
+	
+	private String ticketNumber;
 	
 
 }

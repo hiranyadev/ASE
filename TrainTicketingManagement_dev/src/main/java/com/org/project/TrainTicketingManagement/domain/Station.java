@@ -22,7 +22,7 @@ public class Station extends Trace{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "STATIONID")
-	private long stationId;
+	private Long stationId;
 	private String stationName;
 
 }

@@ -30,4 +30,9 @@ public class ClientServiceImpl implements ClientService {
 	public boolean checkclientAlreadyExistByEmail(String email) {
 		return clientRepository.existsByEmail(email);
 	}
+
+	@Override
+	public Client getClientByEmail(String username) {
+		return clientRepository.findByEmail(username);
+	}
 }

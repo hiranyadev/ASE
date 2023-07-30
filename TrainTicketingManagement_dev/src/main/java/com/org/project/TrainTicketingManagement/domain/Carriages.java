@@ -1,5 +1,6 @@
 package com.org.project.TrainTicketingManagement.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +26,7 @@ public class Carriages {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CARRIAGEID")
-	private long carriageId;
+	private Long carriageId;
 	private String carriageno;
 	private int noOfSeats;
 	
@@ -35,5 +36,8 @@ public class Carriages {
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="trainClassid", nullable=false)
 	private TrainClasses trainclass;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private TrainLongPriceses journeyprice;
 
 }

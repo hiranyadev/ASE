@@ -1,13 +1,18 @@
 package com.org.project.TrainTicketingManagement.domain;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,9 +29,10 @@ public class BookingDetails {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long bookingId;
+	private Long bookingId;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="CLIENTID", nullable=false)
 	private Client client;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -34,6 +40,9 @@ public class BookingDetails {
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Tickets ticket;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date bookingDate;
 	
 
 }

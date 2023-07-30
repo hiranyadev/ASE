@@ -1,5 +1,9 @@
 package com.org.project.TrainTicketingManagement.domain;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +15,8 @@ public class SearchContents {
 	
 	private Station departureStation;
 	private Station destinationStation;
-	private String departureDate;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date departureDate;
 
 }

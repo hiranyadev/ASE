@@ -1,11 +1,16 @@
 package com.org.project.TrainTicketingManagement.service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+import com.org.project.TrainTicketingManagement.domain.BookingDetails;
 import com.org.project.TrainTicketingManagement.domain.Carriages;
+import com.org.project.TrainTicketingManagement.domain.Client;
 import com.org.project.TrainTicketingManagement.domain.SearchContents;
+import com.org.project.TrainTicketingManagement.domain.SeatArrangement;
 import com.org.project.TrainTicketingManagement.domain.Station;
+import com.org.project.TrainTicketingManagement.domain.Tickets;
 import com.org.project.TrainTicketingManagement.domain.Train;
 import com.org.project.TrainTicketingManagement.domain.TrainClasses;
 import com.org.project.TrainTicketingManagement.domain.TrainSchedule;
@@ -17,5 +22,13 @@ public interface CustomerPanelService {
 	List<Station> getAvailableStaions();
 	TrainSchedule getTrainScheduleById(Long id);
 	List<Carriages> getTrainClassesByTrainId(Train train);
+	List<SeatArrangement> getAllBookedSeatsByDate(LocalDate bookingDate);
+	Station getStationById(Long departurStationId);
+	Tickets createTicketBooking(Tickets bookingtickets);
+	BookingDetails createBookingDetails(BookingDetails bookingDetails);
+	List<Tickets> getAllTicketsByClient(Client client);
+	List<BookingDetails> getAllBookingHisotryByClient(Client client);
+	Carriages getBookingCabineById(Long cabinid);
+	SeatArrangement createSeateArrangement(SeatArrangement seatArrangement);
 
 }
