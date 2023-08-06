@@ -9,14 +9,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.org.project.TrainTicketingManagement.domain.Client;
+import com.org.project.TrainTicketingManagement.dto.EmailMessage;
 import com.org.project.TrainTicketingManagement.service.ClientService;
 import com.org.project.TrainTicketingManagement.service.CustomerPanelService;
+import com.org.project.TrainTicketingManagement.util.EmailService;
 
 @Controller
 public class LoginController {
 	
 	@Autowired
 	public ClientService clientService;
+	
+	@Autowired
+	public EmailService emailService;
 	
 	@Autowired
 	public CustomerPanelService customerPanelService;
@@ -40,6 +45,8 @@ public class LoginController {
 		}else {
 			client.setUsername(client.getEmail());
 			Client createdClient = clientService.createClient(client);
+			EmailMessage ems = new EmailMessage(client);
+			emailService.sendSimpleEmail(ems);
 			if(createdClient != null)
 				session.setAttribute("msg", "Welcome to Online ticketing system. Please Login");
 			else

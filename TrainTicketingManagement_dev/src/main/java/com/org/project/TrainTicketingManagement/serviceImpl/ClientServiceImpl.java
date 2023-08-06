@@ -35,4 +35,17 @@ public class ClientServiceImpl implements ClientService {
 	public Client getClientByEmail(String username) {
 		return clientRepository.findByEmail(username);
 	}
+
+	@Override
+	public Client updateClient(Client updatedClient) {
+		Client existingClient = clientRepository.findById(updatedClient.getClientId()).orElse(null);
+	        if (existingClient != null) {
+	        	existingClient.setAddress(updatedClient.getAddress());
+	        	existingClient.setContactNumber(updatedClient.getContactNumber());
+	        	existingClient.setEmail(updatedClient.getEmail());
+
+	            return clientRepository.save(existingClient);
+	        }
+	        return null; // or throw an exception if you want to handle it differently
+	    }
 }

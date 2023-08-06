@@ -45,9 +45,10 @@
 
 				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
 					<li class="active"><a th:href="@{/client/}">Home</a></li>
-					<li><a href="services.html">Services</a></li>
-					<li><a href="about.html">About</a></li>
+					<li><a th:href="@{/client/liveLocation}">View Trains Track</a></li>
 					<li><a th:href="@{/client/viewbookinghistory}">View Booking History</a></li>
+					<li><a th:href="@{/client/information}">Information</a></li>
+					<li><a th:href="@{/client/contactUs}">Contact Us</a></li>
 					<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> LogOut</a></li>
 				</ul>
 				
@@ -73,7 +74,7 @@
 								<form class="form" action="#" th:action="@{/client/searchData}" method="post" th:object="${bookingData}">
 									<div class="row mb-2">
 										<div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-											<select th:field="*{departureStation}" id="depStation" name="depStation" class="form-control custom-select">
+											<select th:field="*{departureStation}" id="depStation" name="depStation" class="form-control custom-select" required="required">
 												<option value="">Departure</option>
 												<option 
 											        th:each="station : ${stations}" 
@@ -83,7 +84,7 @@
 											</select>
 										</div>
 										<div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-											<select th:field="*{destinationStation}" id="desStation" name="desStation" class="form-control custom-select">
+											<select th:field="*{destinationStation}" id="desStation" name="desStation" class="form-control custom-select" required="required">
 												<option value="">Destination</option>
 												<option 
 											        th:each="station : ${stations}" 
@@ -93,7 +94,7 @@
 											</select>
 										</div>
 										<div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-											<input th:field="*{departureDate}" type="date" class="form-control" name="date">
+											<input th:field="*{departureDate}" type="date" class="form-control" name="date" required="required">
 										</div>
 									</div>    
 									<div class="row align-items-stretch">
@@ -118,6 +119,13 @@
 			</div>
 		</div>
 	</div>
+	<div class="container">
+			<th:block th:if="${session.msg}">
+				<p class="text-center fs-4 text-success">[[${session.error}]]</p>
+				<th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+				<!-- <th:block th:text="${#session.removeAttribute('msg')}"></th:block> -->
+			</th:block>
+		</div>
 	<div class="untree_co-section">
 		<div class="container">
 			<div class="row mb-5 justify-content-center">
@@ -309,13 +317,12 @@
 						<a href="#" class="d-block mb-3"><img src="../images/hero-slider-1.jpg" alt="Image" class="img-fluid"></a>
 						<span class="d-flex align-items-center loc mb-2">
 							<span class="icon-room mr-3"></span>
-							<span>Italy</span>
+							<span>Up Country</span>
 						</span>
 						<div class="d-flex align-items-center">
 							<div>
-								<h3><a href="#">Rialto Mountains</a></h3>
+								<h3><a href="#">Watwala</a></h3>
 								<div class="price ml-auto">
-									<span>$520.00</span>
 								</div>
 							</div>
 							
@@ -328,13 +335,12 @@
 						<a href="#" class="d-block mb-3"><img src="../images/hero-slider-2.jpg" alt="Image" class="img-fluid"></a>
 						<span class="d-flex align-items-center loc mb-2">
 							<span class="icon-room mr-3"></span>
-							<span>United States</span>
+							<span>Main City</span>
 						</span>
 						<div class="d-flex align-items-center">
 							<div>
-								<h3><a href="#">San Francisco</a></h3>
+								<h3><a href="#">Mount Lavinia</a></h3>
 								<div class="price ml-auto">
-									<span>$520.00</span>
 								</div>
 							</div>
 							
@@ -347,13 +353,12 @@
 						<a href="#" class="d-block mb-3"><img src="../images/hero-slider-3.jpg" alt="Image" class="img-fluid"></a>
 						<span class="d-flex align-items-center loc mb-2">
 							<span class="icon-room mr-3"></span>
-							<span>Malaysia</span>
+							<span>Down South</span>
 						</span>
 						<div class="d-flex align-items-center">
 							<div>
-								<h3><a href="#">Perhentian Islands</a></h3>
+								<h3><a href="#">Galle</a></h3>
 								<div class="price ml-auto">
-									<span>$750.00</span>
 								</div>
 							</div>
 							
@@ -367,14 +372,13 @@
 
 						<span class="d-flex align-items-center loc mb-2">
 							<span class="icon-room mr-3"></span>
-							<span>Switzerland</span>
+							<span>Uva</span>
 						</span>
 
 						<div class="d-flex align-items-center">
 							<div>
-								<h3><a href="#">Lake Thun</a></h3>
+								<h3><a href="#">Ella</a></h3>
 								<div class="price ml-auto">
-									<span>$520.00</span>
 								</div>
 							</div>
 							
@@ -436,6 +440,35 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- <div class="container">
+	  <div style="text-align:center">
+	    <h2>Contact Us</h2>
+	    <p>Swing by for a cup of coffee, or leave us a message:</p>
+	  </div>
+	  <div class="row">
+	    <div class="column">
+	      <img src="/w3images/map.jpg" style="width:100%">
+	    </div>
+	    <div class="column">
+	      <form th:action="@{/sendMail}" th:object = "${newmail}" method="POST">
+	        <label for="fname">First Name</label>
+	        <input type="text" id="fname" name="firstname" th:field = "*{fName}" placeholder="Your name..">
+	        <label for="lname">Last Name</label>
+	        <input type="text" id="lname" name="lastname" th:field = "*{lName}" placeholder="Your last name..">
+	        <label for="country">Country</label>
+	        <select id="country" name="country">
+	          <option value="australia">Australia</option>
+	          <option value="canada">Canada</option>
+	          <option value="usa">USA</option>
+	        </select>
+	        <label for="subject">Subject</label>
+	        <textarea id="subject" name="subject" th:field = "*{subject}" placeholder="Write something.." style="height:170px"></textarea>
+	        <input type="submit" value="Submit">
+	      </form>
+	    </div>
+	  </div>
+	</div> -->
 
 	<div class="site-footer">
 		<div class="inner first">
@@ -546,7 +579,7 @@
 				showCursor: true,
 				preStringTyped: (arrayPos, self) => {
 					arrayPos++;
-					console.log(arrayPos);
+					//console.log(arrayPos);
 					$('.slides img').removeClass('active');
 					$('.slides img[data-id="'+arrayPos+'"]').addClass('active');
 				}

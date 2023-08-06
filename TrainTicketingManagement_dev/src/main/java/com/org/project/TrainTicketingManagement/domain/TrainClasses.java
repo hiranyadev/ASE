@@ -1,5 +1,7 @@
 package com.org.project.TrainTicketingManagement.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +18,12 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper=false)
 @Entity
 @Table(name="TRAINCLASS")
-public class TrainClasses extends Trace{
+public class TrainClasses extends Trace  implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5338298163821222914L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long trainClassid;

@@ -10,4 +10,6 @@ public interface ClientService {
 
 	public Client getClientByEmail(String username);
 
+	public Client updateClient(Client updatedClient);
+
 }

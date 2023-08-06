@@ -22,6 +22,7 @@ public interface CustomerPanelRepository extends JpaRepository<TrainSchedule, Lo
 	@Query("SELECT ts FROM TrainSchedule ts WHERE ts.scheduleDate >= ?1 AND ts.status=1")
 	List<TrainSchedule> findTrainScheduleByScheduleDateAndStatus(@DateTimeFormat(pattern = "yyyy-MM-dd") Date date);
 
+	@Query("SELECT ts FROM TrainSchedule ts WHERE ts.scheduleDate >= ?1 AND ts.scheduleDate <= ?2")
+	List<TrainSchedule> findByDateBetween(@DateTimeFormat(pattern = "yyyy-MM-dd") Date fromDate, Date toDate);
 	
-
 }

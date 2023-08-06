@@ -1,5 +1,6 @@
 package com.org.project.TrainTicketingManagement.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,8 +29,12 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper=false)
 @Entity
 @Table(name="TRAIN_SCHEDULE")
-public class TrainSchedule extends Trace{
+public class TrainSchedule extends Trace  implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8413561836224078773L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long scheduleId;
@@ -50,6 +57,7 @@ public class TrainSchedule extends Trace{
 	
 	private int status;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "trainschedule", cascade = CascadeType.ALL)
 	private List<TrainTracking> trainTracking;
 

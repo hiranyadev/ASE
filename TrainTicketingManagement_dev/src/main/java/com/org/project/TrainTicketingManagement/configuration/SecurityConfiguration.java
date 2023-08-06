@@ -1,5 +1,6 @@
 package com.org.project.TrainTicketingManagement.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -9,10 +10,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+	
+	@Autowired
+	public AuthenticationSuccessHandler customersuccessHandler;
 	
 	@Bean
 	public UserDetailsService userDetailsServices() {
@@ -43,8 +48,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		
 		http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
 		.antMatchers("/client/**").hasRole("USER")
+		.antMatchers("/driver/**").access("hasRole('ROLE_DRIVER')")
 		.antMatchers("/**").permitAll().and().formLogin().loginPage("/signin").loginProcessingUrl("/login")
-		.defaultSuccessUrl("/admin/").and().csrf().disable();
+		.successHandler(customersuccessHandler).and().csrf().disable();
 	}
 	
 }

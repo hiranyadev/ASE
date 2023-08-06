@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -39,8 +40,13 @@ public class SeatArrangement {
 	@ManyToOne
 	private Client client;
 	
+	@OneToOne
+	private Tickets ticket;
+	
+	private int status;
+	
 	public String allSeatsRecerved(SeatArrangement seatArrangement) {
-		String allreceved = null;		
+		String allreceved = "";		
 		for(String s : seatArrangement.seatNo) {
 			allreceved+=" "+s;
 		}		

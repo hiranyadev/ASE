@@ -20,10 +20,22 @@ public class BookingDetailsDto {
 	private String nic;
 	private Long scheduleId;
 	private Long clientId;
+	
 	private Long departurStationId;
 	private Long destinationStationId;
 	private Long distancePriceId;
+	
+	private String firstName;
+	private String lastName;
+	private Data returnDate;
+	private Data depatureDate;
+	private String returnDeparturStation;
+	private String returnDstinationStation;
+	
 	private double price;
 	private String others;
+	
+	private Double numberoftickets;
+	private Double sumOfPrice;
 
 }

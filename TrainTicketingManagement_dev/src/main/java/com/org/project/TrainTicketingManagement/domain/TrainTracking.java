@@ -7,7 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,13 +27,14 @@ public class TrainTracking {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long trackingId;
 	private Date trackingDate;
-	private String time;
-	private String location;
 	
+	@JsonIgnore
 	@ManyToOne
 	private TrainSchedule trainschedule;
 	
-	
-	
+	@JsonIgnore
+	@OneToOne
+	private TrainLocations location;
+
 
 }

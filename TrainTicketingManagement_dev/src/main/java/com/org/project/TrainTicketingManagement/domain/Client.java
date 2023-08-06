@@ -1,5 +1,6 @@
 package com.org.project.TrainTicketingManagement.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +27,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-public class Client {
+public class Client  implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3509922552930404946L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,7 +69,11 @@ public class Client {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date registerDate;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
 	private List<SeatArrangement> seat;
+	
+	@Transient
+	private String rate;
 
 }

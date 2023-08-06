@@ -23,17 +23,17 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 		    <div class="navbar-header">
-				<a class="navbar-brand " href="/index" > Train Booking <span class="text-primary">.</span></a>
+				<a class="navbar-brand " th:href="@{/client/}" > Train Booking <span class="text-primary">.</span></a>
 		    </div>
 		    <ul class="nav navbar-nav">
-				<li class="active"><a href="/index">Home</a></li>
-				<li><a href="/services">Services</a></li>
-				<li><a href="/about">About</a></li>
-				<li><a href="/contact">Contact Us</a></li>
+				<li class="active"><a th:href="@{/client/}">Home</a></li>
+				<li><a th:href="@{/client/liveLocation}">View Trains Track</a></li>
+				<li><a th:href="@{/client/viewbookinghistory}">View Booking History</a></li>
+				<li><a th:href="@{/client/information}">Information</a></li>
+				<li><a th:href="@{/client/contactUs}">Contact Us</a></li>
 		    </ul>
 		    <ul class="nav navbar-nav navbar-right">
-		      <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
-		      <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		      <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> LogOut </a></li>
 		    </ul>
 		</div>
 	</nav>
@@ -59,12 +59,10 @@
 							<th th:text="${trainSchedule.arrival.stationName}"></th>
 							<th th:text="${trainSchedule.departTime}"></th>
 							<th th:text="${trainSchedule.arrivalTime}"></th>
-							<th>
-    							<span th:if="${trainSchedule.status == 1}"> Active </span>
-							</th>
+							<th th:text="${trainSchedule.status}? 'Active' : 'Canceled' ">
 							<th><div class="card_body mt-1">
 								<a class="button" th:href="@{/client/booking/{id}(id=${trainSchedule.scheduleId})}">  
-    								<button>Proceed</button>
+    								<button class="btn btn-primary">Proceed</button>
     							</a>
 								</div>
 							</th>

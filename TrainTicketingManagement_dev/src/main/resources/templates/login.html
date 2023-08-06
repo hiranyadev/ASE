@@ -297,10 +297,10 @@
 			<th:block th:if="${session.msg}">
 				<p class="text-center fs-4 text-success">[[${session.msg}]]</p>
 				<th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
-				<!-- <th:block th:text="${#session.removeAtttribute('msg')}"></th:block> -->
+				<!-- <th:block th:text="${#session.removeAttribute('msg')}"></th:block> -->
 			</th:block>
-			<div th:if="${param.error}" class="alert alert-danger">Invalid username or password</div>
-			<div th:if="${param.logout}" class="alert alert-success">Login successfully</div>
+			<!-- <div th:if="${param.error}" class="alert alert-danger">Invalid username or password</div>
+			<div th:if="${param.logout}" class="alert alert-success">Login successfully</div> -->
 			<form action="/login" method="post">
 				<h1>Sign in</h1>
 				<input type="text" placeholder="Username" name="username"/>

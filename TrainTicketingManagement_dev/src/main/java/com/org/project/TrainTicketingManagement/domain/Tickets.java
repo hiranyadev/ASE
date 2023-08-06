@@ -1,5 +1,6 @@
 package com.org.project.TrainTicketingManagement.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -28,8 +29,12 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper=false)
 @Entity
 @Table(name="TICKETS")
-public class Tickets extends Trace{
+public class Tickets extends Trace  implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6098110901985344725L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ticketId;
